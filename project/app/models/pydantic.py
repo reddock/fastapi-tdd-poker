@@ -2,6 +2,7 @@
 
 
 from pydantic import BaseModel
+from datetime import datetime
 
 
 class PlayerPayloadSchema(BaseModel):
@@ -9,4 +10,14 @@ class PlayerPayloadSchema(BaseModel):
 
 
 class PlayerResponseSchema(PlayerPayloadSchema):
+    id: int
+
+
+class EventPayloadSchema(BaseModel):
+    name: str
+    location: str
+    day_time: datetime
+
+
+class EventResponseSchema(EventPayloadSchema):
     id: int
