@@ -1,8 +1,8 @@
 # project/app/api/crud.py
 
 
-from app.models.pydantic import PlayerPayloadSchema
-from app.models.tortoise import Player
+from app.models.pydantic import PlayerPayloadSchema, EventPayloadSchema
+from app.models.tortoise import Player, Event
 
 from typing import Union, List
 
@@ -23,3 +23,9 @@ async def get(id: int) -> Union[dict, None]:
 async def get_all() -> List:
     players = await Player.all().values()
     return players
+
+
+async def post_event(payload: EventPayloadSchema) -> int:
+    event = Event(name=payload.name, location=payload.location, day_time=payload.day_time)
+    await event.save()
+    return event.id
